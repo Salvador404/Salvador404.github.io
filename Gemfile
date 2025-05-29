@@ -3,5 +3,5 @@
 source "https://rubygems.org"
 
 
-gem "jekyll-theme-console"
+gem "jekyll-remote-theme"
 
