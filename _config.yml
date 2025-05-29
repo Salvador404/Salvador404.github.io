@@ -2,7 +2,9 @@ title: MadTech
 description: A blog about systems, C, assembly and security learning path
 baseurl: ""
 url: "https://salvador404.github.io"
-theme: jekyll-theme-console
+remote_theme: b2a3e8/jekyll-theme-console
+plugins:
+  - jekyll-remote-theme
 
 author:
   name: Salvador404
