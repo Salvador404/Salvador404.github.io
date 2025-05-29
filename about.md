@@ -4,4 +4,7 @@ title: About
 permalink: /about/
 ---
 
-I'm an aspiring systems and security engineer documenting my projects and progress.
+<h1>Hi!</h1>
+I'm MadTech !
+A c/cpp enjoyer ! 
+And  a newbie in the security field.
