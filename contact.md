@@ -9,8 +9,8 @@ permalink: /contact/
 
   
 - [GitHub](https://github.com/Salvador404)  
-- [Twitter/X](https://twitter.com/your_username)  
-- [LinkedIn](https://linkedin.com/in/your_username)  
+- [Twitter/X](https://x.com/mad444tech)  
+- [LinkedIn](https://www.linkedin.com/in/yaser-mohamad-doost-3b70b0334/)  
 
   
 Feel free to reach me via GitHub or email!
