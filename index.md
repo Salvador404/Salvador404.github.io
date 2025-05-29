@@ -1,10 +1,6 @@
 ---
-layout: default
+layout: home
+title: Welcome
 ---
 
-Welcome to my security blog!
-
-### Recent Posts:
-{% for post in site.posts limit:5 %}
-- [{{ post.title }}]({{ post.url }}) ({{ post.date | date: "%b %d, %Y" }})
-{% endfor %}
+Welcome to my blog! This site documents my learning journey in low-level systems, C, assembly, and cybersecurity.
