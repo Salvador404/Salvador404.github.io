@@ -29,7 +29,8 @@ github_username:  Salvador404
 
 # Build settings
 remote_theme: b2a3e8/jekyll-theme-console
-theme: jekyll-theme-hacker
+theme: jekyll-theme-console
+#theme: jekyll-theme-hacker
 plugins:
   - jekyll-feed
 
