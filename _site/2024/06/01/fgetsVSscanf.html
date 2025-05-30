@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; img-src 'self'; font-src 'self' https://fonts.gstatic.com; connect-src 'self'; media-src 'self'; object-src 'self'; child-src 'self'; form-action 'none'; base-uri 'self'" />
+<meta http-equiv="X-XSS-Protection"  content="1;mode=block" always>
+<meta http-equiv="Referrer-Policy" content="no-referrer, strict-origin-when-cross-origin"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>C behavior(scanf and fgets)</title><!-- Begin Jekyll SEO tag v2.8.0 -->
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="C behavior(scanf and fgets)" />
+<meta name="author" content="Salvador404" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="fget() and scanf() functions and their behavior" />
+<meta property="og:description" content="fget() and scanf() functions and their behavior" />
+<link rel="canonical" href="http://localhost:4000/2024/06/01/fgetsVSscanf.html" />
+<meta property="og:url" content="http://localhost:4000/2024/06/01/fgetsVSscanf.html" />
+<meta property="og:site_name" content="MadTech" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2024-06-01T00:00:00+03:30" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="C behavior(scanf and fgets)" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Salvador404"},"dateModified":"2024-06-01T00:00:00+03:30","datePublished":"2024-06-01T00:00:00+03:30","description":"fget() and scanf() functions and their behavior","headline":"C behavior(scanf and fgets)","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2024/06/01/fgetsVSscanf.html"},"url":"http://localhost:4000/2024/06/01/fgetsVSscanf.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" type="text/css" href="/assets/main-dark.css"></head>
+<body>
+    <div class="container"><p>--------------------------------------------------------------------------------</p>
+<nav>
+  <a href="/">Home</a>
+  <a href="/about/">About</a>
+  <a href="/contact/">Contact</a>
+</nav>
+<p>--------------------------------------------------------------------------------</p>
+
+<p>
+___  ___            _  _____            _     
+|  \/  |           | ||_   _|          | |    
+| .  . |  __ _   __| |  | |  ___   ___ | |__  
+| |\/| | / _` | / _` |  | | / _ \ / __|| '_ \ 
+| |  | || (_| || (_| |  | ||  __/| (__ | | | |
+\_|  |_/ \__,_| \__,_|  \_/ \___| \___||_| |_|
+                                              
+                                              
+</p>
+<main>
+      <h1 id="fget-and-scanf-functions-and-their-behavior">fget() and scanf() functions and their behavior<br /></h1>
+
+<p>The <code class="language-plaintext highlighter-rouge">fgets()</code> is a standard version of the <code class="language-plaintext highlighter-rouge">gets()</code> function.<code class="language-plaintext highlighter-rouge">gets()</code>function has long been obsolete
+ because it would prepare the system memory to receive any input value without any prediction;
+ And this could cause overflow.
+ But the <code class="language-plaintext highlighter-rouge">fgets()</code>reduces this possibility by restricting the input.</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="cp">#define Max 100  
+</span> <span class="kt">char</span> <span class="n">str</span><span class="p">[</span><span class="n">Max</span><span class="p">];</span>
+ <span class="n">fgets</span><span class="p">(</span><span class="n">str</span><span class="p">,</span><span class="n">Max</span><span class="p">,</span><span class="n">stdin</span><span class="p">);</span>
+</code></pre></div></div>
+<p><br /></p>
+
+<p><code class="language-plaintext highlighter-rouge">scanf()</code> is also a function for receiving input,
+ which stores the value in a variable by specifying the input format
+ and passing a pointer to that variable.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kt">int</span> <span class="n">item</span><span class="p">;</span>
+ <span class="n">scanf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">item</span><span class="p">);</span>
+</code></pre></div></div>
+<p><br /></p>
+
+<p>But using these two functions in succession can be problematic.
+ If you place the <code class="language-plaintext highlighter-rouge">fgets()</code> immediately after the <code class="language-plaintext highlighter-rouge">scanf()</code>,</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">printf</span><span class="p">(</span><span class="s">"%s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="s">"Enter a number and a sentence :"</span><span class="p">);</span>
+    <span class="kt">int</span> <span class="n">data</span><span class="p">;</span>
+    <span class="kt">char</span> <span class="n">str</span><span class="p">[</span><span class="n">Max</span><span class="p">];</span>
+    <span class="n">scanf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">data</span><span class="p">);</span>
+    <span class="n">fgets</span><span class="p">(</span><span class="n">str</span> <span class="p">,</span> <span class="n">Max</span> <span class="p">,</span> <span class="n">stdin</span><span class="p">);</span>
+</code></pre></div></div>
+<p><br /></p>
+
+<p>What happens is that the program waits while running until you enter a number.
+ After you enter a number and press Enter,
+ the program skips the <code class="language-plaintext highlighter-rouge">fgets()</code> and does not receive a sentence.
+ If we look more closely, the program actually doesn’t jump over the <code class="language-plaintext highlighter-rouge">fgets()</code>.
+ In fact, when you press Enter, the program gives the entire space 
+ after the number to the next line to <code class="language-plaintext highlighter-rouge">fgets()</code> with the same Enter key.
+ So in practice, nothing is stored except <code class="language-plaintext highlighter-rouge">SPACE</code> inside str.
+ The simple solution to this is like this: ‘\n’</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">printf</span><span class="p">(</span><span class="s">"%s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="s">"Enter a number and a sentence :"</span><span class="p">);</span>
+    <span class="kt">int</span> <span class="n">data</span><span class="p">;</span>
+    <span class="kt">char</span> <span class="n">str</span><span class="p">[</span><span class="n">Max</span><span class="p">];</span>
+    <span class="n">scanf</span><span class="p">(</span><span class="s">"%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">data</span><span class="p">);</span>
+    <span class="n">fgets</span><span class="p">(</span><span class="n">str</span> <span class="p">,</span> <span class="n">Max</span> <span class="p">,</span> <span class="n">stdin</span><span class="p">);</span>
+</code></pre></div></div>
+<p><br /></p>
+
+<p>This will cause the program to wait for the next line to enter a sentence.</p>
+
+
+    </main><footer>
+  
+</footer>
+</div>
+  </body>
+</html>
