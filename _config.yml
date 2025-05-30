@@ -5,7 +5,7 @@ url: "https://salvador404.github.io"
 remote_theme: b2a3e8/jekyll-theme-console
 plugins:
   - jekyll-remote-theme
-
+  - jekyll-feed  
 author:
   name: Salvador404
   email: mad444tech@gmail.com
@@ -15,4 +15,5 @@ header_pages:
   -_pages/contact.md
 
 highlighter: rouge
+syntax_highlighter: rouge
 markdown: kramdown

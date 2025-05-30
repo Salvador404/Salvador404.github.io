@@ -7,14 +7,14 @@ title: "C behavior(scanf and fgets)"
 
 # fget() and scanf() functions and their behavior<br>
 
- The `fgets()` is a standard version of the `gets()` function.`gets()`function has long been obsolete
+ The `fgets()` is a standard version of the `gets()` function . `gets()`function has long been obsolete
  because it would prepare the system memory to receive any input value without any prediction;
  And this could cause overflow.
  But the `fgets()`reduces this possibility by restricting the input.
  ```c
- #define Max 100  
- char str[Max];
- fgets(str,Max,stdin);
+    #define Max 100  
+    char str[Max];
+    fgets(str,Max,stdin);
  ```
 <br>
 
@@ -23,8 +23,8 @@ title: "C behavior(scanf and fgets)"
  and passing a pointer to that variable.
 
  ```c
- int item;
- scanf("%d",&item);
+    int item;
+    scanf("%d",&item);
  ```
 <br>
 
